@@ -29,7 +29,6 @@ workflows:
         - module: app
         - cache_level: all
         - variant: debug
-        - report_path_pattern: '*/build/reports/lint-results*.xml'
     - android-unit-test@1:
         inputs:
         - project_location: $PROJECT_LOCATION
@@ -41,12 +40,6 @@ workflows:
         inputs:
         - variant: debug
         - module: app
-        - project_location: $PROJECT_LOCATION
-        - apk_path_pattern: '*/build/outputs/apk/*.apk'
-    - android-instrumented-test:
-        inputs:
-        - main_apk_path: $BITRISE_APK_PATH
-        - test_apk_path: $BITRISE_TEST_APK_PATH
     - virtual-device-testing-for-android@1:
         inputs:
         - test_type: instrumentation
@@ -58,7 +51,7 @@ workflows:
         - test_devices: 'NexusLowRes,29,en,portrait'
     - deploy-to-bitrise-io@2:
         inputs:
-        - notify_user_groups: none  
+        - notify_user_groups: none
     - cache-push@2: {}
   deploy:
     description: >
